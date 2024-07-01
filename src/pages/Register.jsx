@@ -13,8 +13,12 @@ export const action = async ({ request }) => {
     return { displayName, photoURL, email, password };
 };
 
+// custom hooks
+import { useRegister } from "../hooks/useRegister";
+
 function Register() {
     const userData = useActionData();
+    const { isPending, registerWithGoogle } = useRegister();
 
     useEffect(() => {
         if (userData) {
@@ -59,6 +63,7 @@ function Register() {
                     </div>
                     <div>
                         <button
+                            onClick={registerWithGoogle}
                             type="button"
                             className="btn btn-secondary w-full"
                         >
