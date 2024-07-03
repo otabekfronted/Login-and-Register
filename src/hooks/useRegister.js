@@ -1,26 +1,67 @@
-// firbase imports
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../firebase/firebaseConfig";
-
-// react import
 import { useState } from "react";
+// firbase imports
+import { auth } from "../firebase/firebaseConfig";
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    createUserWithEmailAndPassword,
+    updateProfile,
+} from "firebase/auth";
 
-export const useRegister = () => {
+// context
+import { useGlobalContext } from "./useGlobalContext";
+import toast from "react-hot-toast";
+const useRegister = () => {
     const [isPending, setIsPending] = useState(false);
+    const { dispatch } = useGlobalContext();
 
+    // register with google
     const registerWithGoogle = async () => {
-        const provider = new GoogleAuthProvider();
+        setIsPending(true);
         try {
-            setIsPending(true);
+            const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            console.log(user);
+            dispatch({ type: "LOG_IN", payload: user });
+            toast.success(`Welcome, ${user.displayName}`);
             setIsPending(false);
         } catch (error) {
             const errorMessage = error.message;
             console.log(errorMessage);
+            setIsPending(false);
         }
     };
 
-    return { registerWithGoogle, isPending };
+    //register with passwor and emali
+    const registerEmailAndPassword = async (
+        email,
+        password,
+        displayName,
+        photoURL
+    ) => {
+        try {
+            const register = createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            setIsPending(true);
+            const user = (await register).user;
+            await updateProfile(auth.currentUser, {
+                photoURL,
+                displayName,
+            });
+            dispatch({ type: "LOG_IN", payload: user });
+            toast.success(`Welcome, ${user.displayName}`);
+            setIsPending(false);
+        } catch (error) {
+            const errorMessage = error.message;
+            toast.error(errorMessage);
+            setIsPending(false);
+        }
+    };
+
+    return { registerWithGoogle, isPending, registerEmailAndPassword };
 };
+
+export { useRegister };

@@ -18,11 +18,17 @@ import { useRegister } from "../hooks/useRegister";
 
 function Register() {
     const userData = useActionData();
-    const { isPending, registerWithGoogle } = useRegister();
+    const { isPending, registerWithGoogle, registerEmailAndPassword } =
+        useRegister();
 
     useEffect(() => {
         if (userData) {
-            console.log(userData);
+            registerEmailAndPassword(
+                userData.email,
+                userData.password,
+                userData.displayName,
+                userData.photoURL
+            );
         }
     }, [userData]);
 
@@ -54,21 +60,43 @@ function Register() {
                         label="password"
                     />
                     <div>
-                        <button
-                            type="submit"
-                            className=" btn btn-primary btn-block"
-                        >
-                            Register
-                        </button>
+                        {isPending && (
+                            <button
+                                disabled
+                                type="submit"
+                                className=" btn btn-primary btn-block"
+                            >
+                                Loading...
+                            </button>
+                        )}
+                        {!isPending && (
+                            <button
+                                type="submit"
+                                className=" btn btn-primary btn-block"
+                            >
+                                Register
+                            </button>
+                        )}
                     </div>
                     <div>
-                        <button
-                            onClick={registerWithGoogle}
-                            type="button"
-                            className="btn btn-secondary w-full"
-                        >
-                            Google
-                        </button>
+                        {isPending && (
+                            <button
+                                disabled
+                                type="button"
+                                className="btn btn-secondary w-full"
+                            >
+                                Loading...
+                            </button>
+                        )}
+                        {!isPending && (
+                            <button
+                                onClick={registerWithGoogle}
+                                type="button"
+                                className="btn btn-secondary w-full"
+                            >
+                                Google
+                            </button>
+                        )}
                     </div>
                     <div className="text-center">
                         <p>

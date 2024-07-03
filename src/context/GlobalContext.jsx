@@ -17,7 +17,7 @@ const changeState = (state, action) => {
     }
 };
 
-export function GlobalCantextProvider({ children }) {
+export function GlobalContextProvider({ children }) {
     const [state, dispatch] = useReducer(changeState, {
         user: null,
         isAuthReady: false,
@@ -37,4 +37,4 @@ export function GlobalCantextProvider({ children }) {
     );
 }
 
-export default GlobalCantextProvider;
+export default GlobalContextProvider;

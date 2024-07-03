@@ -2,10 +2,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 
-import GlobalCantextProvider from "./context/GlobalCantext.jsx";
+// toast
+import { Toaster } from "react-hot-toast";
+
+import GlobalContextProvider from "./context/GlobalContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <GlobalCantextProvider>
+    <GlobalContextProvider>
         <App />
-    </GlobalCantextProvider>
+        <Toaster />
+    </GlobalContextProvider>
 );

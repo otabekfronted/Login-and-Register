@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+    .align-elemnts {
+        @apply max-w-6xl mx-auto px-4;
+    }
     .auth-bg {
         @apply bg-[url("https://picsum.photos/1000/3000")] bg-cover bg-no-repeat  
          bg-center;
