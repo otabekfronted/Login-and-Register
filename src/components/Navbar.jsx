@@ -54,11 +54,11 @@ function Navbar() {
                     </Link>
                 </div>
                 <div className="flex-none">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 ">
                         <li>
                             <details>
                                 <summary className="text-xl">Pages</summary>
-                                <ul className="bg-base-100 rounded-t-none p-2">
+                                <ul className="bg-slate-700  text-zinc-200 rounded-t-none p-2 ">
                                     <li>
                                         <Link to="/about">About</Link>
                                     </li>
