@@ -5,12 +5,25 @@ import {
 } from "react-router-dom";
 
 // pages
-import { Home, About, Contact, Login, Register, ErrorPage } from "./pages";
+import {
+    Home,
+    About,
+    Contact,
+    Login,
+    Register,
+    ErrorPage,
+    SingleProduct,
+    Cart,
+} from "./pages";
 import MainLayout from "./layouts/MainLayout";
 
 // actions
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
+
+// loader
+import { loader as HomeLoader } from "./pages/Home";
+import { loader as SingleProductLoader } from "./pages/SingleProduct";
 
 // components
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -37,6 +50,7 @@ function App() {
                 {
                     index: true,
                     element: <Home />,
+                    loader: HomeLoader,
                 },
                 {
                     path: "/about",
@@ -45,6 +59,15 @@ function App() {
                 {
                     path: "/contact",
                     element: <Contact />,
+                },
+                {
+                    path: "/singleproduct/:id",
+                    element: <SingleProduct />,
+                    loader: SingleProductLoader,
+                },
+                {
+                    path: "/cart",
+                    element: <Cart />,
                 },
             ],
         },

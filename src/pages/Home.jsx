@@ -1,7 +1,20 @@
+// components
+import ProductsList from "../components/ProductsList";
+
+// customfetch
+import { customFetch } from "../utils";
+
+// loader
+export const loader = async () => {
+    const request = await customFetch();
+    const products = request.data;
+    return { products };
+};
+
 function Home() {
     return (
-        <div className="text-center font-semibold text-4xl mt-14">
-            <h1>Hello Home Page</h1>
+        <div className="align-elements mt-10">
+            <ProductsList />;
         </div>
     );
 }
