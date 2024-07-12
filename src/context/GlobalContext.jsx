@@ -111,7 +111,7 @@ export function GlobalContextProvider({ children }) {
         function toggleTodo(state, id) {
             return produce(state, (draft) => {
                 const product = draft.products.find((prod) => prod.id === id);
-                product.amount = product.amount - 1;
+                product.price = product.amount * product.price;
             });
         }
         console.log(toggleTodo(state, id));
@@ -124,7 +124,7 @@ export function GlobalContextProvider({ children }) {
         let totalPrice = 0;
         state.products.forEach((product) => {
             totalCount = totalCount += product.amount;
-            totalPrice = totalPrice += product.amount * product.price;
+            totalPrice = product.amount * product.price;
         });
 
         dispatch({ type: "TOTAL_PRODUCT_COUNT", payload: totalCount });

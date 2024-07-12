@@ -14,12 +14,14 @@ import {
     ErrorPage,
     SingleProduct,
     Cart,
+    Todos,
 } from "./pages";
 import MainLayout from "./layouts/MainLayout";
 
 // actions
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
+import { action as TodosAction } from "./pages/Todos";
 
 // loader
 import { loader as HomeLoader } from "./pages/Home";
@@ -68,6 +70,11 @@ function App() {
                 {
                     path: "/cart",
                     element: <Cart />,
+                },
+                {
+                    path: "/todos",
+                    element: <Todos />,
+                    action: TodosAction,
                 },
             ],
         },

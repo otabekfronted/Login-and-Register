@@ -5,7 +5,7 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 
 function TableItem({ prod }) {
     const [amount, setAmount] = useState();
-    const { incrementAmount, decrementAmount, money } = useGlobalContext();
+    const { incrementAmount, decrementAmount } = useGlobalContext();
 
     return (
         <tr key={prod.id}>
@@ -28,7 +28,9 @@ function TableItem({ prod }) {
                 </div>
             </td>
             <td>
-                $ {prod.price}
+                <span>
+                    <p>{prod.price}</p>
+                </span>
                 <br />
                 <span className="badge badge-accent badge-sm">
                     Discount: {prod.discountPercentage}%
